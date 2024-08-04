@@ -24,12 +24,12 @@ External Requirements:
 
 ### Clone nvim config
 
-# Linux
+#### Linux
 ```bash
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
-# Windows
+#### Windows
 ```shell
 git clone https://github.com/nvim-lua/kickstart.nvim.git $env:LOCALAPPDATA\nvim\
 ```
