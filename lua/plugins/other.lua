@@ -5,7 +5,6 @@ return {
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = { signs = false },
     },
-    -- lazy.nvim
     {
         'folke/noice.nvim',
         event = 'VeryLazy',
@@ -13,7 +12,11 @@ return {
             -- add any options here
         },
         dependencies = {
+            -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
             'MunifTanjim/nui.nvim',
+            -- OPTIONAL:
+            --   `nvim-notify` is only needed, if you want to use the notification view.
+            --   If not available, we use `mini` as the fallback
             'rcarriga/nvim-notify',
         },
         config = function()
@@ -34,7 +37,36 @@ return {
                     inc_rename = false, -- enables an input dialog for inc-rename.nvim
                     lsp_doc_border = false, -- add a border to hover docs and signature help
                 },
+                views = {
+                    cmdline_popup = {
+                        position = {
+                            row = '90%',
+                            col = '50%',
+                        },
+                    },
+                },
             }
+            require('lualine').setup {
+                sections = {
+                    lualine_x = {
+                        {
+                            require('noice').api.statusline.mode.get,
+                            cond = require('noice').api.statusline.mode.has,
+                            color = { fg = '#ff9e64' },
+                        },
+                    },
+                },
+            }
+        end,
+    },
+    {
+        'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
+        ---@module "ibl"
+        ---@type ibl.config
+        opts = {},
+        config = function()
+            require('ibl').setup()
         end,
     },
 }
