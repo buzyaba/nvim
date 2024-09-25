@@ -7,17 +7,28 @@ return {
      },
      config = function()
          require('mason').setup()
+         local server_list = {
+             clangd = {},
+             pyright = {},
+             lua_ls = {},
+         }
+         local server_keys = {}
+         local n=0
+         for k, v in pairs(server_list) do
+             n = n+1
+             server_keys[n] = k
+         end
          require('mason-lspconfig').setup({
-             ensure_installed = {
-                 "clangd",
-                 "pyright",
-                 "lua_ls",
-             },
+             ensure_installed = server_keys,
          })
          local lspconfig = require('lspconfig')
-         lspconfig.clangd.setup({})
-         lspconfig.pyright.setup({})
-         lspconfig.lua_ls.setup({})
+          local capabilities = require('cmp_nvim_lsp').default_capabilities()
+         for k, v in pairs(server_list) do
+             lspconfig[k].setup(v)
+              lspconfig[k].setup {
+                capabilities = capabilities
+              }
+         end
 
          -- keymaps
         local telescope = require('telescope.builtin')
