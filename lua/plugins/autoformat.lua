@@ -7,7 +7,7 @@ return {
                 formatters_by_ft = {
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
-                    cpp = { 'ast-grep' },
+                    cpp = { 'clang-format' },
                 },
                 vim.keymap.set({ 'n', 'v' }, '<leader>cf', function()
                     require('conform').format {
