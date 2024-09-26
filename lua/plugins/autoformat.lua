@@ -8,6 +8,7 @@ return {
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
                     cpp = { 'clang-format' },
+                    markdown = { 'markdownlint' },
                 },
                 vim.keymap.set({ 'n', 'v' }, '<leader>cf', function()
                     require('conform').format {
