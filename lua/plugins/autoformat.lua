@@ -8,7 +8,10 @@ return {
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
                     cpp = { 'clang-format' },
+                    cmake = { 'cmakelang' },
                     markdown = { 'markdownlint' },
+                    json = { 'jq' },
+                    yaml = { 'yamlfmt' },
                 },
                 vim.keymap.set({ 'n', 'v' }, '<leader>cf', function()
                     require('conform').format {

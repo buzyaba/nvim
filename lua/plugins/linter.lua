@@ -5,6 +5,7 @@ return {
             markdown = { 'markdownlint' },
             cmake = { 'cmakelint' },
             python = { 'flake8' },
+            json = { 'jsonlint' },
         }
         local lint_group = vim.api.nvim_create_augroup('lint', { clear = true })
         vim.api.nvim_create_autocmd({ 'BufEnter', 'InsertLeave', 'BufWritePost' }, {
