@@ -15,12 +15,9 @@ return {
                     live_grep = {
                         file_ignore_patterns = { 'build', 'node_modules', '.git/', '.venv' },
                         hidden = true,
+                        additional_args = { '--hidden' },
                     },
                     find_files = {
-                        file_ignore_patterns = { 'build', 'node_modules', '.git/', '.venv' },
-                        hidden = true,
-                    },
-                    buffers = {
                         file_ignore_patterns = { 'build', 'node_modules', '.git/', '.venv' },
                         hidden = true,
                     },
