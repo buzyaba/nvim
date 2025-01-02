@@ -9,9 +9,9 @@ return {
                     python = { 'isort', 'black' },
                     cpp = { 'clang-format' },
                     cmake = { 'cmakelang' },
-                    markdown = { 'markdownlint' },
-                    json = { 'jq' },
-                    yaml = { 'yamlfmt' },
+                    markdown = { 'prettier' },
+                    json = { 'prettier' },
+                    yaml = { 'prettier' },
                 },
                 vim.keymap.set({ 'n', 'v' }, '<leader>cf', function()
                     require('conform').format {

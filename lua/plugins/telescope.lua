@@ -9,20 +9,21 @@ return {
             vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find Buffers' })
             vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind [H]elp' })
             vim.keymap.set('n', '<leader>fs', builtin.grep_string, { desc = '[F]ind Current [S]tring' })
+            vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[F]ind [D]iagnostics' })
             local telescope = require 'telescope'
             telescope.setup {
                 pickers = {
                     live_grep = {
-                        file_ignore_patterns = { 'build', 'node_modules', '.git/', '.venv' },
+                        file_ignore_patterns = { 'build/', 'node_modules', '.git/', '.venv' },
                         hidden = true,
                         additional_args = { '--hidden' },
                     },
                     find_files = {
-                        file_ignore_patterns = { 'build', 'node_modules', '.git/', '.venv' },
+                        file_ignore_patterns = { 'build/', 'node_modules', '.git/', '.venv' },
                         hidden = true,
                     },
                     grep_string = {
-                        file_ignore_patterns = { 'build', 'node_modules', '.git/', '.venv' },
+                        file_ignore_patterns = { 'build/', 'node_modules', '.git/', '.venv' },
                         hidden = true,
                     },
                 },
