@@ -33,7 +33,7 @@ return {
 
             -- keymaps
             local telescope = require 'telescope.builtin'
-            vim.keymap.set('n', 'gl', vim.diagnostic.open_float, {})
+            vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = '[G]oto [L]inter message'})
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', telescope.lsp_definitions, { desc = '[G]oto [D]efinition' })
             vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]declaration' })

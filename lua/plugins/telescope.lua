@@ -14,16 +14,16 @@ return {
             telescope.setup {
                 pickers = {
                     live_grep = {
-                        file_ignore_patterns = { 'build/', 'node_modules', '.git/', '.venv' },
+                        file_ignore_patterns = { 'build/', 'build\\', 'node_modules', '.git/', '.git\\', '.venv' },
                         hidden = true,
                         additional_args = { '--hidden' },
                     },
                     find_files = {
-                        file_ignore_patterns = { 'build/', 'node_modules', '.git/', '.venv' },
+                        file_ignore_patterns = { 'build/', 'build\\', 'node_modules', '.git/', '.git\\', '.venv' },
                         hidden = true,
                     },
                     grep_string = {
-                        file_ignore_patterns = { 'build/', 'node_modules', '.git/', '.venv' },
+                        file_ignore_patterns = { 'build/', 'build\\', 'node_modules', '.git/', '.git\\', '.venv' },
                         hidden = true,
                     },
                 },

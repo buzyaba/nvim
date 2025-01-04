@@ -1,5 +1,5 @@
 vim.g.mapleader = ' '
-vim.g.maplocalleader = '\\'
+vim.g.maplocalleader = ' '
 
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', {})
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', {})
