@@ -12,7 +12,7 @@ return {
             'neovim/nvim-lspconfig',
             'hrsh7th/cmp-nvim-lsp',
             'L3MON4D3/LuaSnip',
-            'zbinerbaum/copilot-cmp',
+            'zbirenbaum/copilot-cmp',
         },
         config = function()
             local cmp = require 'cmp'
