@@ -27,11 +27,12 @@ return {
         version = false, -- set this to "*" if you want to always pull the latest change, false to update on release
         opts = {
             -- add any opts here
-            -- provider = 'copilot',
+            provider = 'copilot',
         },
+
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
         build = (function()
-            if vim.fn.has 'win32' then
+            if vim.fn.has 'win32' == 1 and vim.fn.has 'wsl' ~= 0 then
                 return 'powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false'
             else
                 return 'make'

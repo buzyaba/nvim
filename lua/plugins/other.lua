@@ -19,4 +19,10 @@ return {
             -- add any options here
         },
     },
+    {
+        'mbbill/undotree',
+        config = function ()
+            vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = 'Toggle [U]ndo-tree' })
+        end
+    },
 }
