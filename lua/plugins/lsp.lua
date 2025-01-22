@@ -39,6 +39,7 @@ return {
             vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]declaration' })
             vim.keymap.set('n', 'gI', telescope.lsp_implementations, { desc = '[G]oto [I]mplementation' })
             vim.keymap.set('n', 'gr', telescope.lsp_references, { desc = '[G]oto [R]eferences' })
+            vim.keymap.set('n', 'gR', vim.lsp.buf.rename, { desc = '[R]ename symbol' })
             vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction' })
         end,
     },

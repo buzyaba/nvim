@@ -2,7 +2,7 @@ return {
     'mfussenegger/nvim-lint',
     config = function()
         require('lint').linters_by_ft = {
-            cmake = { 'cmakelang' },
+            cmake = { 'cmakelint' },
             python = { 'flake8' },
         }
         local lint_group = vim.api.nvim_create_augroup('lint', { clear = true })
