@@ -8,7 +8,9 @@ return {
         config = function()
             require('mason').setup()
             local server_list = {
-                clangd = {},
+                clangd = {
+                    cmd = { 'clangd', '--header-insertion=never' },
+                },
                 pyright = {},
                 lua_ls = {},
                 cmake = {},
@@ -25,15 +27,18 @@ return {
             local lspconfig = require 'lspconfig'
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             for k, v in pairs(server_list) do
-                lspconfig[k].setup(v)
-                lspconfig[k].setup {
+                local server_config = {
                     capabilities = capabilities,
                 }
+                for cfg, val in pairs(v) do
+                    server_config[cfg] = val
+                end
+                lspconfig[k].setup(server_config)
             end
 
             -- keymaps
             local telescope = require 'telescope.builtin'
-            vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = '[G]oto [L]inter message'})
+            vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = '[G]oto [L]inter message' })
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', telescope.lsp_definitions, { desc = '[G]oto [D]efinition' })
             vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]declaration' })
