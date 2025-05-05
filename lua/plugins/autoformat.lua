@@ -3,7 +3,8 @@ return {
         'stevearc/conform.nvim',
         opts = {},
         config = function()
-            require('conform').setup {
+            local conform = require 'conform'
+            conform.setup {
                 formatters_by_ft = {
                     lua = { 'stylua' },
                     python = { 'isort', 'black' },
@@ -20,6 +21,10 @@ return {
                         timemout_ms = 500,
                     }
                 end, { desc = '[C]ode [F]ormat' }),
+            }
+            -- Additional options for various formatters
+            conform.formatters['clang-format'] = {
+                prepend_args = { '--fallback-style=LLVM' },
             }
         end,
     },
