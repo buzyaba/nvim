@@ -28,6 +28,12 @@ return {
         opts = {
             -- add any opts here
             provider = 'copilot',
+            mode = 'legacy',
+            providers = {
+                copilot = {
+                    disable_tools = true,
+                },
+            },
         },
 
         -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

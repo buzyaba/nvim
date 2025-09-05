@@ -1,15 +1,12 @@
 return {
     {
         'catppuccin/nvim',
+        name = 'catppuccin',
         priority = 1000,
         init = function()
             vim.cmd.colorscheme 'catppuccin-mocha'
-            vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = '#BAC2DE' })
-            vim.api.nvim_set_hl(0, 'LineNr', { fg = '#F9E2AF' })
-            vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = '#BAC2DE' })
         end,
     },
-
     {
         'folke/which-key.nvim',
         event = 'VeryLazy',
@@ -59,12 +56,22 @@ return {
         end,
     },
     {
-        'echasnovski/mini.nvim',
-        version = false,
+        'nvim-lualine/lualine.nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
         config = function()
-            require('mini.ai').setup()
-            require('mini.surround').setup()
-            require('mini.statusline').setup()
+            require('lualine').setup {
+                options = {
+                    section_separators = { left = '', right = '' },
+                },
+                sections = {
+                    lualine_a = {
+                        { 'mode', separator = { left = '' } },
+                    },
+                    lualine_z = {
+                        { 'location', separator = { right = '' } },
+                    },
+                },
+            }
         end,
     },
 }
