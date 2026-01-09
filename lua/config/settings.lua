@@ -29,3 +29,7 @@ opt.smartcase  = true
 
 -- Buffer editing QoL
 opt.undofile = true
+
+-- Autocompletion
+opt.completeopt = { 'menuone', 'noselect', 'popup' }
+opt.pumheight   = 15

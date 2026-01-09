@@ -1,3 +1,4 @@
-require 'config.remaps'
-require 'config.settings'
-require 'config.lazy'
+require("config.remaps")
+require("config.settings")
+require("config.lazy")
+
