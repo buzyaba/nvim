@@ -33,3 +33,11 @@ opt.undofile = true
 -- Autocompletion
 opt.completeopt = { 'menuone', 'noselect', 'popup' }
 opt.pumheight   = 15
+
+-- Highlight on yank
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = augroup,
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+})

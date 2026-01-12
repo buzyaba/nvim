@@ -15,6 +15,6 @@ vim.keymap.set("n", "<C-Right>", "<C-w><C-l>", {})
 -- Disable highlight on ESC when searching
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
-vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
-vim.keymap.set("n", "<leader>p", '"+p', { desc = "Paste after from clipboard" })
-vim.keymap.set("n", "<leader>P", '"+P', { desc = "Paste before from clipboard" })
+vim.keymap.set({"v", "n"}, "<leader>y", '"+y', { desc = "Yank to clipboard" })
+vim.keymap.set({"v", "n"}, "<leader>p", '"+p', { desc = "Paste after from clipboard" })
+vim.keymap.set({"v", "n"}, "<leader>P", '"+P', { desc = "Paste before from clipboard" })
