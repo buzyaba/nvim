@@ -27,7 +27,7 @@ return {
         },
       },
     },
-    config = function()
+    config = function(_, opts)
       local builtin = require("telescope.builtin")
       vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
       vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind [G]rep" })
@@ -35,10 +35,11 @@ return {
       vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
       vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "[F]ind Current [S]tring" })
       vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+      vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[F]ind [K]eymaps" })
 
       local telescope = require("telescope")
       telescope.load_extension("fzf")
-      telescope.setup({})
+      telescope.setup(opts)
     end,
   },
 }
