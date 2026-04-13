@@ -34,13 +34,6 @@ vim.opt.mouse = "a"
 vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 10
 
-vim.diagnostic.config({
-  virtual_text = false,
-  signs = true,
-  underline = true,
-  float = { border = "rounded" },
-})
-
 ---- Search
 vim.opt.ignorecase = tru
 vim.opt.smartcase = true
@@ -62,17 +55,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 local pack_hook = function(ev)
   -- Use available |event-data|
   local name, kind = ev.data.spec.name, ev.data.kind
- -- Run build script after plugin's code has changed
-  if (kind == "install" or kind == "update") then
-      if name == "telescope-fzf-native.nvim" then
-        -- Append `:wait()` if you need synchronous execution
-        print(ev.data.path)
-        vim.system({ "cmake", "-S", ".", "-B", "build", "-DCMAKE_BUILD_TYPE=Release" }, 
-            { cwd = ev.data.path }
-        ):wait()
-        vim.system({"cmake", "--build", "build", "--config", "Release", "--target", "install" },
-            { cwd = ev.data.path }):wait()
-      end
+  -- Run build script after plugin's code has changed
+  if kind == "install" or kind == "update" then
+    if name == "telescope-fzf-native.nvim" then
+      vim.system({ "cmake", "-S", ".", "-B", "build", "-DCMAKE_BUILD_TYPE=Release" }, { cwd = ev.data.path }):wait()
+      vim
+        .system({ "cmake", "--build", "build", "--config", "Release", "--target", "install" }, { cwd = ev.data.path })
+        :wait()
+    end
   end
 end
 
@@ -114,17 +104,17 @@ end, { desc = "Buffer local keymaps" })
 
 -- File explorer
 require("oil").setup({
-      columns = {
-        "icon",
-        "size",
-        "mtime",
-      },
-      view_options = {
-        show_hidden = true,
-      },
+  columns = {
+    "icon",
+    "size",
+    "mtime",
+  },
+  view_options = {
+    show_hidden = true,
+  },
 })
 
-vim.keymap.set("n", "<leader>e", "<cmd>Oil --float<cr>", { desc = "Open explorer" } )
+vim.keymap.set("n", "<leader>e", "<cmd>Oil --float<cr>", { desc = "Open explorer" })
 
 -- Picker
 local telescope = require("telescope")
@@ -165,6 +155,7 @@ local server_list = {
     cmd = { "stylua", "--lsp", "--search-parent-directories" },
   },
   copilot = {},
+  marksman = {},
 }
 
 for k, v in pairs(server_list) do
@@ -184,7 +175,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set({ "v", "n" }, "<leader>cf", vim.lsp.buf.format, { desc = "Code format" })
     end
     if client:supports_method("textDocument/inlineCompletion") then
-      vim.lsp.inline_completion.enable(true, { client_id = client.id, bufnr = args.buf })
+      vim.lsp.inline_completion.enable(true, { bufnr = args.buf })
 
       vim.keymap.set(
         "i",
