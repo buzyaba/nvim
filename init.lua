@@ -63,12 +63,16 @@ local pack_hook = function(ev)
   -- Use available |event-data|
   local name, kind = ev.data.spec.name, ev.data.kind
  -- Run build script after plugin's code has changed
-  if name == "telescope-fzf-native.nvim" and (kind == "install" or kind == "update") then
-    -- Append `:wait()` if you need synchronous execution
-    vim.system(
-      { "cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install" },
-      { cwd = ev.data.path }
-    )
+  if (kind == "install" or kind == "update") then
+      if name == "telescope-fzf-native.nvim" then
+        -- Append `:wait()` if you need synchronous execution
+        print(ev.data.path)
+        vim.system({ "cmake", "-S", ".", "-B", "build", "-DCMAKE_BUILD_TYPE=Release" }, 
+            { cwd = ev.data.path }
+        ):wait()
+        vim.system({"cmake", "--build", "build", "--config", "Release", "--target", "install" },
+            { cwd = ev.data.path }):wait()
+      end
   end
 end
 
@@ -86,10 +90,13 @@ vim.pack.add({
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/folke/which-key.nvim",
+  "https://github.com/stevearc/oil.nvim",
+  "https://github.com/lewis6991/gitsigns.nvim",
   -- Picker
   "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
 })
+
 -- Enable experimental UI2
 require("vim._core.ui2").enable({})
 
@@ -105,18 +112,22 @@ vim.keymap.set("n", "<leader>?", function()
   require("which-key").show({ global = false })
 end, { desc = "Buffer local keymaps" })
 
--- Picker
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find files" })
-vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Find globally" })
-vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Find buffers" })
-vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "Find help" })
-vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "Find current string" })
-vim.keymap.set("n", "<leader>d", builtin.diagnostics, { desc = "Find diagnostics" })
-vim.keymap.set("n", "<leader>k", builtin.keymaps, { desc = "Find keymaps" })
+-- File explorer
+require("oil").setup({
+      columns = {
+        "icon",
+        "size",
+        "mtime",
+      },
+      view_options = {
+        show_hidden = true,
+      },
+})
 
+vim.keymap.set("n", "<leader>e", "<cmd>Oil --float<cr>", { desc = "Open explorer" } )
+
+-- Picker
 local telescope = require("telescope")
-telescope.load_extension("fzf")
 telescope.setup({
   pickers = {
     live_grep = {
@@ -134,6 +145,16 @@ telescope.setup({
     },
   },
 })
+
+telescope.load_extension("fzf")
+
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<leader>f", builtin.find_files, { desc = "Find files" })
+vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Find globally" })
+vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "Find buffers" })
+vim.keymap.set("n", "<leader>h", builtin.help_tags, { desc = "Find help" })
+vim.keymap.set("n", "<leader>d", builtin.diagnostics, { desc = "Find diagnostics" })
+vim.keymap.set("n", "<leader>k", builtin.keymaps, { desc = "Find keymaps" })
 
 -- LSP
 local server_list = {
