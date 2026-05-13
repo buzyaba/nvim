@@ -76,6 +76,7 @@ vim.pack.add({
   "https://github.com/neovim/nvim-lspconfig",
   -- Themes
   "https://github.com/catppuccin/nvim",
+  "https://github.com/Shatur/neovim-ayu",
   -- UI
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-lua/plenary.nvim",
@@ -91,7 +92,7 @@ vim.pack.add({
 require("vim._core.ui2").enable({})
 
 -- Theme
-vim.cmd.colorscheme("catppuccin-mocha")
+vim.cmd.colorscheme("ayu-dark")
 
 -- Which-key
 require("which-key").setup({
